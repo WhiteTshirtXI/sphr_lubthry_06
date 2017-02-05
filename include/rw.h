@@ -72,10 +72,12 @@ void write(int J, int M, double dr, double dt, double *params,
 	}
 
 	// create filename
-	if (tstop > t1)
-		sprintf(pfx, "../output/go/%s/%s/%s/%s/%s/", Ca, Bo, Ma, Dr, Dt);
-	else
-		sprintf(pfx, "../output/stop/%s/%s/%s/%s/%s/%s/", Ca, Bo, Ma, Tstop, Dr, Dt);
+	//if (tstop > t1)
+	//	sprintf(pfx, "../output/go/%s/%s/%s/%s/%s/", Ca, Bo, Ma, Dr, Dt);
+	//else
+	//	sprintf(pfx, "../output/stop/%s/%s/%s/%s/%s/%s/", Ca, Bo, Ma, Tstop, Dr, Dt);
+	
+	sprintf(pfx, "./output/");
 	sprintf(sfx, "%s.txt", f);
 	sprintf(fn , "%s%s", pfx, sfx);
 
