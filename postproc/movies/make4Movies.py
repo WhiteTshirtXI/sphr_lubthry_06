@@ -15,7 +15,8 @@ outdir   = workdir + '/../output/go/Ca1em01/Bo1ep00/Ma1ep01/dr5em02/dt1em05'
 
 #outdir   = workdir + '/../output/stop/Ca1em03/Bo1ep00/Ma1ep01/tstop1-2/dr5em02/dt1em05'
 outdir   = workdir + '/../output/stop/Ca1em03/Bo1ep00/Ma0ep00/tstop1-2/dr5em02/dt1em05'
-outdir   = workdir + '/../output/stop/Ca1em03/Bo1ep00/Ma0ep00/tstop1-2/dr5em02/dt1em03'
+outdir   = workdir + '/../output/stop/Ca1em03/Bo1ep00/Ma0ep00/tstop1-2/dr5em02/dt1em05'
+outdir   = workdir + '/../output/stop/Ca2em02/Bo1ep00/Ma0ep00/tstop1-3/dr5em02/dt1em05'
 #outdir   = workdir + '/../src/output'
 #outdir   = workdir + '/../output/stop/Ca1em01/Bo1ep00/Ma1ep02/tstop1-2/dr5em02/dt1em4'
 
