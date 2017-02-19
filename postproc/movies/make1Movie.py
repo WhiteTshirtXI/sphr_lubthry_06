@@ -51,31 +51,23 @@ J  = J1 - 1
 N  = N1 - 1
 
 # set up the figure, the axis, and the plot element to be animated
-fig = plt.figure(figsize=(15,2.5))
-ax1 = fig.add_subplot(121)
-ax2 = fig.add_subplot(122)
+fig = plt.figure(figsize=(15,8))
+ax1 = fig.add_subplot(111)
 line1a, = ax1.plot([], [], 'b-')
 line1b, = ax1.plot([], [], 'k-')
-line2,  = ax2.plot([], [], 'g-')
 time1   = ax1.text(0.85, 0.05, '', transform=ax1.transAxes)
-time2   = ax2.text(0.85, 0.05, '', transform=ax2.transAxes)
 
-for ax in (ax1,ax2):
-	ax.set_xlim( 0, 4)
-	ax.set_xlabel('$\overline{\sigma}$')
-ax1.set_ylabel('$\overline{h}$')
+ax1.set_xlim( 0, 4)
 ax1.set_ylim(-1.5, 1.5)
-ax2.set_ylabel(r'$\overline{\Gamma}$')
-ax2.set_ylim( 0, 1)
+ax1.set_xlabel('$\sigma / \sqrt{a b}$',fontsize=18)
+ax1.set_ylabel('$h/b$',fontsize=18)
 
 # initialization function: plot the background of each frame
 def init() :
 	line1a.set_data([], [])
 	line1b.set_data([], [])
-	line2 .set_data([], [])
 	time1 .set_text('')
-	time2 .set_text('')
-	return line1a, line1b, line2, time1, time2
+	return line1a, line1b, time1
 
 # animation function, to be called sequentially
 def animate(i) :
@@ -83,14 +75,11 @@ def animate(i) :
 	x   =  rdata[:,i]
 	y1a =  hdata[:,i]
 	y1b = -fdata[:,i]
-	y2  =  gdata[:,i] + 1
 
 	line1a.set_data(x, y1a)
 	line1b.set_data(x, y1b)
-	line2 .set_data(x, y2 )
 
-	time1 .set_text("$\overline{t}$ = " + str(t))
-	time2 .set_text("$\overline{t}$ = " + str(t))
+	time1 .set_text("$t U/b$ = " + str(t))
 
 	# shift axes on ax1
 	shift = True
@@ -104,10 +93,10 @@ def animate(i) :
 		# h plot
 		xmin0, xmax0 = ax1.get_xlim()
 		ymin0, ymax0 = ax1.get_ylim()
-		xmax1 =  0.16
+		xmax1 =  0.8
 		dxmax = (xmax1 - xmax0)/dt
-		ymin1 =  0.19
-		ymax1 =  0.21
+		ymin1 =  0.0
+		ymax1 =  0.4
 		dymin = (ymin1 - ymin0)/dt
 		dymax = (ymax1 - ymax0)/dt
 		if i > i0 and xmax0 > xmax1 :
@@ -116,40 +105,26 @@ def animate(i) :
 			ymax = ymax0 + (i - i0)*dymax
 			ax1.set_xlim( xmin0, xmax)
 			ax1.set_ylim( ymin , ymax)
-		
-		# g plot
-		xmin0, xmax0 = ax2.get_xlim()
-		ymin0, ymax0 = ax2.get_ylim()
-		xmax1 =  1.2
-		dxmax = (xmax1 - xmax0)/dt
-		ymin1 =  0.9
-		ymax1 =  1.01
-		dymin = (ymin1 - ymin0)/dt
-		dymax = (ymax1 - ymax0)/dt
-		if i > i0 and xmax0 > xmax1 :
-			xmax = xmax0 + (i - i0)*dxmax
-			ymin = ymin0 + (i - i0)*dymin
-			ymax = ymax0 + (i - i0)*dymax
-			ax2.set_xlim( xmin0, xmax)
-			ax2.set_ylim( ymin , ymax)
-
 
 	print "t = " + str(t)
-	return line1a, line1b, line2, time1, time2
+	return line1a, line1b, time1
 
 # call the animator. blit=True means only re-draw the parts that have changed
 anim = animation.FuncAnimation(fig, animate, init_func=init, frames=N1, interval=45, repeat=True, blit=False)
 
-## format and save movie
-##fileName = 'hg_go_Ca1em01_Bo1ep00_Ma0ep00_dr5em02_dt1em05.mp4'
-##fileName = 'hg_go_Ca1em02_Bo1ep00_Ma0ep00_dr5em02_dt1em06.mp4'
-##fileName = 'hg_go_Ca1em03_Bo1ep00_Ma0ep00_dr5em02_dt1em07.mp4'
-##fileName = 'hg_stop_Ca1em03_Bo1ep00_Ma0ep00_tstop_1-2_dr5em02_dt1em05.mp4'
-##fileName = 'hg_stop_Ca1em03_Bo1ep00_Ma1ep00_tstop_1-2_dr5em02_dt1em05.mp4'
-##fileName = 'hg_stop_Ca1em03_Bo1ep00_Ma1ep01_tstop_1-2_dr5em02_dt1em05.mp4'
-#fileName = 'hg_stop_Ca1em03_Bo1ep00_Ma1ep02_tstop_1-2_dr5em02_dt1em05.mp4'
-#Writer = animation.writers['ffmpeg']
-#writer = Writer(fps=20, metadata=dict(artist='Me'), bitrate=1800)
-#anim.save(fileName, writer=writer)
+# format and save movie
+#fileName = 'hg_go_Ca1em01_Bo1ep00_Ma0ep00_dr5em02_dt1em05.mp4'
+#fileName = 'hg_go_Ca1em02_Bo1ep00_Ma0ep00_dr5em02_dt1em06.mp4'
+#fileName = 'hg_go_Ca1em03_Bo1ep00_Ma0ep00_dr5em02_dt1em07.mp4'
+#fileName = 'hg_stop_Ca1em03_Bo1ep00_Ma0ep00_tstop_1-2_dr5em02_dt1em05.mp4'
+#fileName = 'hg_stop_Ca1em03_Bo1ep00_Ma1ep00_tstop_1-2_dr5em02_dt1em05.mp4'
+#fileName = 'hg_stop_Ca1em03_Bo1ep00_Ma1ep01_tstop_1-2_dr5em02_dt1em05.mp4'
+fileName = 'h_vs_t_Ca0-1_Bo1_d1-3_Ma0.mp4'
+Writer = animation.writers['ffmpeg']
+writer = Writer(fps=60, metadata=dict(artist='Me'), bitrate=1800)
+anim.save(fileName, writer=writer)
+#writer = Writer(fps=60, metadata=dict(artist='Me'), bitrate=1800)
+#anim.save('im.mp4', writer=writer)
+
 
 plt.show()
