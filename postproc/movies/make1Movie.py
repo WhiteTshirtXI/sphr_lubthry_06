@@ -7,6 +7,9 @@ from math import pi, log
 from scipy import integrate, interpolate
 import os
 
+#plt.rcParams['animation.ffmpeg_path'] = '/usr/bin/ffmpeg'
+plt.rcParams['animation.ffmpeg_path'] = '/home/jmb/Downloads/ffmpeg-3.2.4/ffmpeg'
+
 # paths
 workdir  = os.getcwd()
 workdir  = workdir + '/..'
@@ -20,7 +23,7 @@ outdir   = workdir + '/../output/stop/Ca1em03/Bo1ep00/Ma1ep00/tstop1-2/dr5em02/d
 outdir   = workdir + '/../output/stop/Ca1em03/Bo1ep00/Ma1ep01/tstop1-2/dr5em02/dt1em05'
 outdir   = workdir + '/../output/stop/Ca1em03/Bo1ep00/Ma1ep02/tstop1-2/dr5em02/dt1em05'
 outdir   = workdir + '/../output/stop/Ca2em02/Bo1ep00/Ma0ep00/tstop1-3/dr5em02/dt1em05'
-outdir   = workdir + '/../src3/output'
+outdir   = workdir + '/../src8/output'
 #outdir   = workdir + '/../output/stop/Ca1em03/Bo1ep00/Ma1ep02/tstop1-2/dr5em02/dt1em05'
 #outdir   = workdir + '/../output/stop/Ca1em01/Bo1ep00/Ma1ep02/tstop1-2/dr5em02/dt1em4'
 
@@ -119,12 +122,11 @@ anim = animation.FuncAnimation(fig, animate, init_func=init, frames=N1, interval
 #fileName = 'hg_stop_Ca1em03_Bo1ep00_Ma0ep00_tstop_1-2_dr5em02_dt1em05.mp4'
 #fileName = 'hg_stop_Ca1em03_Bo1ep00_Ma1ep00_tstop_1-2_dr5em02_dt1em05.mp4'
 #fileName = 'hg_stop_Ca1em03_Bo1ep00_Ma1ep01_tstop_1-2_dr5em02_dt1em05.mp4'
-fileName = 'h_vs_t_Ca0-1_Bo1_d1-3_Ma0.mp4'
-Writer = animation.writers['ffmpeg']
-writer = Writer(fps=60, metadata=dict(artist='Me'), bitrate=1800)
-anim.save(fileName, writer=writer)
-#writer = Writer(fps=60, metadata=dict(artist='Me'), bitrate=1800)
-#anim.save('im.mp4', writer=writer)
+fileName = 'h_vs_t_Ca0-1_Bo1_d1-3_Ma100.mp4'
+#Writer = animation.writers['ffmpeg']
+#Writer = Writer(fps=60, metadata=dict(artist='Me'), bitrate=1800)
+#Anim.save(fileName, writer=writer)
+mywriter = animation.FFMpegWriter()
+anim.save(fileName, writer=mywriter)
 
-
-plt.show()
+#plt.show()
